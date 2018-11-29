@@ -1,0 +1,96 @@
+/////////////////////Adding Retrofit in Gradle//////////////////////////
+
+
+compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+
+
+/////////////////////Permission in Android Manifest/////////////////////////
+
+
+ <!--Internet Permission-->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+/////////////////////Data Types , Getters and setters/////////////////////////
+
+public class RetroPhoto {
+
+    @SerializedName("albumId")
+    private Integer albumId;
+    @SerializedName("id")
+    private Integer id;
+    @SerializedName("title")
+    private String title;
+    @SerializedName("url")
+    private String url;
+    @SerializedName("thumbnailUrl")
+    private String thumbnailUrl;
+
+    public RetroPhoto(Integer albumId, Integer id, String title, String url, String thumbnailUrl) {
+        this.albumId = albumId;
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public Integer getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Integer albumId) {
+        this.albumId = albumId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+    }
+}
+
+////////////////////////////////////////////////////////
+
+public class RetrofitClientInstance {
+
+    private static Retrofit retrofit;
+    private static final String BASE_URL = "https://jsonplaceholder.typicode.com";  //URL of resource
+
+    public static Retrofit getRetrofitInstance() {		//creating retrofit instance
+        if (retrofit == null) {
+            retrofit = new retrofit2.Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+        }
+        return retrofit;
+    }
+}
